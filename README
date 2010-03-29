@@ -1,0 +1,3 @@
+This is a Yahoo Query Language (YQL) Open Table for searching for Markets in Sao Paulo.
+
+The user can choose city area and day of the week and the query will return all the addresses that has Markets on it.
