@@ -2,9 +2,12 @@
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
   <meta>
     <author>Luis Cipriani</author>
-    <description>Search on Markets in Sao Paulo</description>
-    <sampleQuery><![CDATA[
-      select * from {table} ]]></sampleQuery>
+    <description>
+      Busca por Feiras Livres em São Paulo, por dia da semana e área da cidade. 
+      ----
+      Search for Free Markets in São Paulo, by day of the week and city area.
+    </description>
+    <sampleQuery><![CDATA[ SELECT * FROM {table} WHERE dayOfTheWeek = 'DOMINGO' AND region = 'OESTE' ]]></sampleQuery>
     <documentationURL></documentationURL>
   </meta>
   <bindings>
