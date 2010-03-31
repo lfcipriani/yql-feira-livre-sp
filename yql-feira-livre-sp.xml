@@ -39,28 +39,27 @@
 			var i = 0, day, address = "", marketList = [];
 			
 			default xml namespace = '';
-			for each (var item in xdata.font) {
-				y.log(item);
+			for each (var item in xdata) {
 				if (i == 0) {
 					day = item.toString();
 				} else if (i == 3) {
 					address += item.toString() + ", Sao Paulo";
 					marketList.push({day: day, address: address});
 					address = "";
-					i = 0;
+					i = -1;
 				} else {
 					address += item.toString() + ", ";
 				}
+				i++;
 			}
 			
-			y.log(marketList.length);
 			default xml namespace = '';
 			var result = <markets />
 			for (i = 0; i < marketList.length; i++) {
 				result.markets += <market><dayOfTheWeek>{marketList[i].day}</dayOfTheWeek><address>{marketList[i].address}</address></market>;
 			}
 			
-			response.object = xdata;
+			response.object = result;
 		]]></execute>
 	</select>
   </bindings>
