@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
   <meta>
-	<author>Luis Cipriani</author>
+	<author>Luis Cipriani (@lfcipriani)</author>
 	<description>
 		Busca por Feiras Livres em São Paulo, por dia da semana e zona da cidade.
 		- As zonas possíveis são: CENTRAL, NORTE, SUL, LESTE e OESTE.
