@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
   <meta>
-    <author>Luis Cipriani</author>
-    <description>
-      Busca por Feiras Livres em São Paulo, por dia da semana e área da cidade. 
-      ----
-      Search for Free Markets in São Paulo, by day of the week and city area.
-    </description>
-    <sampleQuery><![CDATA[ SELECT * FROM {table} WHERE dayOfTheWeek = 'DOMINGO' AND region = 'OESTE' ]]></sampleQuery>
-    <documentationURL></documentationURL>
+	<author>Luis Cipriani</author>
+	<description>
+		Busca por Feiras Livres em São Paulo, por dia da semana e zona da cidade.
+		- As zonas possíveis são: CENTRAL, NORTE, SUL, LESTE e OESTE.
+		- Os dias da semana possíveis são: DOMINGO, TERÇA, QUARTA, QUINTA, SEXTA, SÁBADO.
+		- Deixe o dia da semana em branco para pesquisar em todos os dias de uma vez só.
+		
+		----
+		
+		Search for Free Markets in São Paulo (Brazil), by day of the week and city zone.
+		- Possibles zones are: CENTRAL, NORTE, SUL, LESTE e OESTE.
+		- Possible days of the week are: DOMINGO, TERÇA, QUARTA, QUINTA, SEXTA, SÁBADO.
+		- Don't mention the day of the week for a full week search.
+	</description>
+	<sampleQuery><![CDATA[ SELECT * FROM {table} WHERE zone = 'CENTRAL' ]]></sampleQuery>
+	<sampleQuery><![CDATA[ SELECT * FROM {table} WHERE dayOfTheWeek = 'DOMINGO' AND zone = 'OESTE' ]]></sampleQuery>
+	<documentationURL></documentationURL>
   </meta>
   <bindings>
+	<select itemPath="" produces="JSON" >
+		<urls>  
+			<url>http://www3.prefeitura.sp.gov.br/feiras/feiras.asp</url>
+		</urls>  
+		<inputs>
+			<key id="dayOfTheWeek" type="xs:string" paramType="variable" default="todos" />
+			<key id="zone" type="xs:string" paramType="variable" required="true" />
+		</inputs>  
+		<execute><![CDATA[
+			var postData = "zona="+ zone +"&dia=" + dayOfTheWeek;
+			var data = request.accept('text/html').
+			           contentType("application/x-www-form-urlencoded").
+			           post(postdata).response;
+			var xdata = y.xpath(data, "//font[@color='Red']");
+			response.object = <postresult>{xdata}</postresult>;
+		]]></execute>
+	</select>
   </bindings>
 </table>
 
