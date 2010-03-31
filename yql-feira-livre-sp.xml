@@ -30,11 +30,37 @@
 		</inputs>  
 		<execute><![CDATA[
 			var postData = "zona="+ zone +"&dia=" + dayOfTheWeek;
+			
 			var data = request.accept('text/html').
 			           contentType("application/x-www-form-urlencoded").
-			           post(postdata).response;
+			           post(postData).response;
 			var xdata = y.xpath(data, "//font[@color='Red']");
-			response.object = <postresult>{xdata}</postresult>;
+			
+			var i = 0, day, address = "", marketList = [];
+			
+			default xml namespace = '';
+			for each (var item in xdata.font) {
+				y.log(item);
+				if (i == 0) {
+					day = item.toString();
+				} else if (i == 3) {
+					address += item.toString() + ", Sao Paulo";
+					marketList.push({day: day, address: address});
+					address = "";
+					i = 0;
+				} else {
+					address += item.toString() + ", ";
+				}
+			}
+			
+			y.log(marketList.length);
+			default xml namespace = '';
+			var result = <markets />
+			for (i = 0; i < marketList.length; i++) {
+				result.markets += <market><dayOfTheWeek>{marketList[i].day}</dayOfTheWeek><address>{marketList[i].address}</address></market>;
+			}
+			
+			response.object = xdata;
 		]]></execute>
 	</select>
   </bindings>
