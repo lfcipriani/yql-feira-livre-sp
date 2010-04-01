@@ -48,7 +48,7 @@
 				if (i == 0) {
 					day = item.toString().trim();
 				} else if (i == 3) {
-					address += "Sao Paulo, Brazil";
+					address += item.toString().trim() + ", Sao Paulo, Brazil";
 					marketList.push({day: day, address: address});
 					address = "";
 					i = -1;
