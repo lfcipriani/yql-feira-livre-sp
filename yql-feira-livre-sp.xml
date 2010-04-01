@@ -41,20 +41,25 @@
 			           post(postData).response;
 			var xdata = y.xpath(data, "//font[@color='Red']");
 			
-			var i = 0, day, address = "", marketList = [];
+			var i = 0, day, number, address = "", marketList = [];
 			
 			default xml namespace = '';
 			for each (var item in xdata) {
 				if (i == 0) {
 					day = item.toString().trim();
+				} else if (i == 1) {
+					address += item.toString().trim() + ", ";
+        } else if (i == 2) {
+          number = item.toString().trim();
+          if (number != "S/N" && number.length != 0) {
+            address += number + ", ";
+          }
 				} else if (i == 3) {
-					address += item.toString().trim() + ", Sao Paulo, Brazil";
+					address += "Sao Paulo, Brazil";
 					marketList.push({day: day, address: address});
 					address = "";
 					i = -1;
-				} else {
-					address += item.toString().trim() + ", ";
-				}
+				} 
 				i++;
 			}
 			
