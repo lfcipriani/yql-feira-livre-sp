@@ -5,7 +5,7 @@ This is a Yahoo Query Language (YQL) Open Table for searching for Markets in Sao
 Busca por Feiras Livres em São Paulo, por dia da semana e zona da cidade.
 
 * As zonas possíveis são: CENTRAL, NORTE, SUL, LESTE e OESTE.
-* Os dias da semana possíveis são: DOMINGO, TERÇA, QUARTA, QUINTA, SEXTA, SÁBADO.
+* Os dias da semana possíveis são: DOMINGO, TERCA, QUARTA, QUINTA, SEXTA, SÁBADO.
 * Deixe o dia da semana em branco para pesquisar em todos os dias de uma vez só.
 
 ----
@@ -13,7 +13,7 @@ Busca por Feiras Livres em São Paulo, por dia da semana e zona da cidade.
 Search for Free Markets in São Paulo (Brazil), by day of the week and city zone.
 
 * Possibles zones are: CENTRAL, NORTE, SUL, LESTE e OESTE.
-* Possible days of the week are: DOMINGO, TERÇA, QUARTA, QUINTA, SEXTA, SÁBADO.
+* Possible days of the week are: DOMINGO, TERCA, QUARTA, QUINTA, SEXTA, SÁBADO.
 * Don't mention the day of the week for a full week search.
 
 ### Exemplos/Sample queries

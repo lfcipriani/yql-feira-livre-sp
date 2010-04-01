@@ -5,14 +5,14 @@
 	<description>
 		Busca por Feiras Livres em São Paulo, por dia da semana e zona da cidade.
 		- As zonas possíveis são: CENTRAL, NORTE, SUL, LESTE e OESTE.
-		- Os dias da semana possíveis são: DOMINGO, TERÇA, QUARTA, QUINTA, SEXTA, SÁBADO.
+		- Os dias da semana possíveis são: DOMINGO, TERCA, QUARTA, QUINTA, SEXTA, SÁBADO.
 		- Deixe o dia da semana em branco para pesquisar em todos os dias de uma vez só.
 		
 		----
 		
 		Search for Free Markets in São Paulo (Brazil), by day of the week and city zone.
 		- Possibles zones are: CENTRAL, NORTE, SUL, LESTE e OESTE.
-		- Possible days of the week are: DOMINGO, TERÇA, QUARTA, QUINTA, SEXTA, SÁBADO.
+		- Possible days of the week are: DOMINGO, TERCA, QUARTA, QUINTA, SEXTA, SÁBADO.
 		- Don't mention the day of the week for a full week search.
 	</description>
 	<sampleQuery><![CDATA[ SELECT * FROM {table} WHERE zone = 'CENTRAL' ]]></sampleQuery>
@@ -29,6 +29,11 @@
 			<key id="zone" type="xs:string" paramType="variable" required="true" />
 		</inputs>  
 		<execute><![CDATA[
+			String.prototype.trim = function() {
+				a = this.replace(/^\s+/, '');
+				return a.replace(/\s+$/, '');
+			};
+			
 			var postData = "zona="+ zone +"&dia=" + dayOfTheWeek;
 			
 			var data = request.accept('text/html').
@@ -41,14 +46,14 @@
 			default xml namespace = '';
 			for each (var item in xdata) {
 				if (i == 0) {
-					day = item.toString();
+					day = item.toString().trim();
 				} else if (i == 3) {
-					address += item.toString() + ", Sao Paulo";
+					address += item.toString().trim() + ", Sao Paulo";
 					marketList.push({day: day, address: address});
 					address = "";
 					i = -1;
 				} else {
-					address += item.toString() + ", ";
+					address += item.toString().trim() + ", ";
 				}
 				i++;
 			}
